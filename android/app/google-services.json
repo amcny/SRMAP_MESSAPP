@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "383468578019",
+    "project_id": "srmap-676c7",
+    "storage_bucket": "srmap-676c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383468578019:android:17742e95fc5496388151d6",
+        "android_client_info": {
+          "package_name": "com.mycompany.srmapmess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383468578019-7pgdbjdrhgja7t5s82ib0jpqur93n4af.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.srmapmess",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "383468578019-12oq01vqg49cl0aholkikgpshpu2jbgp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjd1663Tes62KSbE2ATZYNV-5sxvbT878"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383468578019-12oq01vqg49cl0aholkikgpshpu2jbgp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "383468578019-b42kv0kpetr2u60m83i03t41ol3mo6np.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.srmapmess.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
