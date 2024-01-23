@@ -54,28 +54,20 @@ class _DropdownWidgetState extends State<DropdownWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(15.0),
-          child: AppBar(
-            backgroundColor: const Color(0xFF404020),
-            automaticallyImplyLeading: false,
-            actions: const [],
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                'SRMAP MESS',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Outfit',
-                      color: Colors.white,
-                      fontSize: 22.0,
-                    ),
-              ),
-              centerTitle: false,
-              expandedTitleScale: 1.0,
-              titlePadding:
-                  const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 10.0),
-            ),
-            elevation: 2.0,
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF404020),
+          automaticallyImplyLeading: false,
+          title: Text(
+            'SRMAP MESS',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Open Sans',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
           ),
+          actions: const [],
+          centerTitle: false,
+          elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
@@ -91,7 +83,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                     child: Text(
                       'Choose Mess ',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
+                            fontFamily: 'Open Sans',
                             fontSize: 25.0,
                           ),
                     ),
@@ -105,14 +97,14 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                   child: Text(
                     'Please select your mess',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
+                          fontFamily: 'Open Sans',
                           fontSize: 18.0,
                         ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: FlutterFlowDropDown<String>(
                   controller: _model.dropDownValueController ??=
                       FormFieldController<String>(
@@ -124,8 +116,9 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                   width: 300.0,
                   height: 60.0,
                   textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        fontSize: 20.0,
+                        fontFamily: 'Open Sans',
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.normal,
                       ),
                   hintText: 'Please select...',
                   icon: Icon(
@@ -135,7 +128,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                   ),
                   fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   elevation: 2.0,
-                  borderColor: FlutterFlowTheme.of(context).primaryText,
+                  borderColor: const Color(0xFF595B5B),
                   borderWidth: 2.0,
                   borderRadius: 8.0,
                   margin: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
@@ -157,16 +150,17 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                   },
                   text: 'Save',
                   options: FFButtonOptions(
-                    height: 40.0,
+                    height: 50.0,
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: const Color(0xFF404020),
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Readex Pro',
+                          fontFamily: 'Open Sans',
                           color: Colors.white,
                           fontSize: 20.0,
+                          fontWeight: FontWeight.normal,
                         ),
                     elevation: 3.0,
                     borderSide: const BorderSide(

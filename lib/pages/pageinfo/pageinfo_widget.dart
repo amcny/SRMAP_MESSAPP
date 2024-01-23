@@ -99,7 +99,7 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
               title: Text(
                 '${pageinfoMessRecord.day} menu',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Outfit',
+                      fontFamily: 'Open Sans',
                       color: Colors.white,
                       fontSize: 22.0,
                     ),
@@ -157,7 +157,7 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
-                                            fontFamily: 'Readex Pro',
+                                            fontFamily: 'Open Sans',
                                             color: Colors.white,
                                           ),
                                     ),

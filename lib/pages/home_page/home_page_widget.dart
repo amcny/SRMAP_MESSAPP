@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -115,8 +114,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   await showDialog(
                                     context: context,
                                     builder: (alertDialogContext) {
-                                      return WebViewAware(
-                                          child: AlertDialog(
+                                      return AlertDialog(
                                         title: const Text('Welcome 👋'),
                                         content:
                                             const Text('Thanks for using our app ❤️'),
@@ -127,7 +125,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             child: const Text('Close'),
                                           ),
                                         ],
-                                      ));
+                                      );
                                     },
                                   );
                                 },
@@ -181,7 +179,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
                                               .override(
-                                                fontFamily: 'Outfit',
+                                                fontFamily: 'Open Sans',
                                                 color: Colors.white,
                                                 fontSize: 23.0,
                                                 fontWeight: FontWeight.w500,
@@ -201,7 +199,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Open Sans',
                                                   color: Colors.white,
                                                   fontSize: 15.0,
                                                   fontWeight: FontWeight.w300,
@@ -243,7 +241,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Open Sans',
                                   color: Colors.white,
                                 ),
                           ),
@@ -256,14 +254,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: 60.0,
                   showsTestAd: false,
-                  androidAdUnitID: 'ca-app-pub-3991707481593664/3272729973',
+                  androidAdUnitID: 'ca-app-pub-3654957842084949/3966044987',
                 ),
                 StreamBuilder<List<MessRecord>>(
                   stream: queryMessRecord(
-                    queryBuilder: (messRecord) => messRecord.where(
-                      'name',
-                      isEqualTo: FFAppState().name,
-                    ),
+                    queryBuilder: (messRecord) => messRecord
+                        .where(
+                          'day',
+                          isEqualTo: dateTimeFormat(
+                            'EEEE',
+                            getCurrentTimestamp,
+                            locale: FFLocalizations.of(context).languageCode,
+                          ),
+                        )
+                        .where(
+                          'name',
+                          isEqualTo: FFAppState().name,
+                        ),
                     singleRecord: true,
                   ),
                   builder: (context, snapshot) {
@@ -282,10 +289,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       );
                     }
                     List<MessRecord> columnMessRecordList = snapshot.data!;
-                    // Return an empty Container when the item does not exist.
-                    if (snapshot.data!.isEmpty) {
-                      return Container();
-                    }
                     final columnMessRecord = columnMessRecordList.isNotEmpty
                         ? columnMessRecordList.first
                         : null;
@@ -295,7 +298,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         children: [
                           Builder(
                             builder: (context) {
-                              final meal =
+                              final mealdata =
                                   columnMessRecord?.mealdata.toList() ?? [];
                               return ListView.separated(
                                 padding: const EdgeInsets.fromLTRB(
@@ -307,11 +310,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 primary: false,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: meal.length,
+                                itemCount: mealdata.length,
                                 separatorBuilder: (_, __) =>
                                     const SizedBox(height: 10.0),
-                                itemBuilder: (context, mealIndex) {
-                                  final mealItem = meal[mealIndex];
+                                itemBuilder: (context, mealdataIndex) {
+                                  final mealdataItem = mealdata[mealdataIndex];
                                   return Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         20.0, 0.0, 20.0, 0.0),
@@ -348,13 +351,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   MainAxisAlignment.spaceAround,
                                               children: [
                                                 Text(
-                                                  mealItem.meal,
+                                                  mealdataItem.meal,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .titleMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
+                                                        fontFamily: 'Open Sans',
                                                         color: Colors.white,
                                                       ),
                                                 ),
@@ -365,7 +367,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Text(
-                                                mealItem.item,
+                                                mealdataItem.item,
                                                 textAlign: TextAlign.center,
                                                 style: FlutterFlowTheme.of(
                                                         context)

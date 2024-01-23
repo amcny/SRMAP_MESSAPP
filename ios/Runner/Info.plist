@@ -54,7 +54,10 @@
 	<true/>
 
 
-
+	<key>NSCameraUsageDescription</key>
+    <string>Allow SRMAP:Mess App to access your camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow SRMAP:Mess App to access your Photos</string>
 
 
 	<key>UILaunchStoryboardName</key>

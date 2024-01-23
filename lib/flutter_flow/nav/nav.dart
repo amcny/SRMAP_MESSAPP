@@ -90,16 +90,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'dropdown',
           path: '/dropdown',
           builder: (context, params) => const DropdownWidget(),
-        ),
-        FFRoute(
-          name: 'FeedbackWebView',
-          path: '/feedbackWebView',
-          builder: (context, params) => const FeedbackWebViewWidget(),
-        ),
-        FFRoute(
-          name: 'ComplaintWebView',
-          path: '/complaintWebView',
-          builder: (context, params) => const ComplaintWebViewWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

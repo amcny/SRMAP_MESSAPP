@@ -61,7 +61,7 @@ class _MainindexWidgetState extends State<MainindexWidget> {
             child: Text(
               'Mess Menu',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Outfit',
+                    fontFamily: 'Open Sans',
                     color: Colors.white,
                     fontSize: 22.0,
                   ),
@@ -184,7 +184,7 @@ class _MainindexWidgetState extends State<MainindexWidget> {
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: 60.0,
                   showsTestAd: false,
-                  androidAdUnitID: 'ca-app-pub-7821507066051919/7856053065',
+                  androidAdUnitID: 'ca-app-pub-3654957842084949/3966044987',
                 ),
               ),
             ],
