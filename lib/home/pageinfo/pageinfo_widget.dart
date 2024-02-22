@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'pageinfo_model.dart';
 export 'pageinfo_model.dart';
@@ -17,7 +18,7 @@ class PageinfoWidget extends StatefulWidget {
   final DocumentReference? pass;
 
   @override
-  _PageinfoWidgetState createState() => _PageinfoWidgetState();
+  State<PageinfoWidget> createState() => _PageinfoWidgetState();
 }
 
 class _PageinfoWidgetState extends State<PageinfoWidget> {
@@ -58,14 +59,13 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: Center(
+            body: const Center(
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
+                child: SpinKitRipple(
+                  color: Color(0xFF404020),
+                  size: 50.0,
                 ),
               ),
             ),
@@ -99,7 +99,7 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
               title: Text(
                 '${pageinfoMessRecord.day} menu',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Open Sans',
+                      fontFamily: 'Ubuntu',
                       color: Colors.white,
                       fontSize: 22.0,
                     ),
@@ -157,7 +157,7 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
-                                            fontFamily: 'Open Sans',
+                                            fontFamily: 'Ubuntu',
                                             color: Colors.white,
                                           ),
                                     ),

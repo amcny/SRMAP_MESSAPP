@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
+import 'auth/firebase_auth/auth_util.dart';
+
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'index.dart';
 
 void main() async {
@@ -44,10 +46,12 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
   ThemeMode _themeMode = ThemeMode.system;
 
+  late Stream<BaseAuthUser> userStream;
+
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
 
-  bool displaySplashImage = true;
+  final authUserSub = authenticatedUserStream.listen((_) {});
 
   @override
   void initState() {
@@ -55,9 +59,20 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
+    userStream = srmapMessFirebaseUserStream()
+      ..listen((user) => _appStateNotifier.update(user));
+    jwtTokenStream.listen((_) {});
+    Future.delayed(
+      const Duration(milliseconds: 1000),
+      () => _appStateNotifier.stopShowingSplashImage(),
+    );
+  }
 
-    Future.delayed(const Duration(milliseconds: 1000),
-        () => setState(() => _appStateNotifier.stopShowingSplashImage()));
+  @override
+  void dispose() {
+    authUserSub.cancel();
+
+    super.dispose();
   }
 
   void setLocale(String language) {
@@ -84,7 +99,6 @@ class _MyAppState extends State<MyApp> {
       ],
       theme: ThemeData(
         brightness: Brightness.light,
-        scrollbarTheme: const ScrollbarThemeData(),
       ),
       themeMode: _themeMode,
       routerConfig: _router,
@@ -119,20 +133,13 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomePage': const HomePageWidget(),
       'mainindex': const MainindexWidget(),
-      'Profile': const ProfileWidget(),
+      'Settings': const SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
-    final MediaQueryData queryData = MediaQuery.of(context);
-
     return Scaffold(
-      body: MediaQuery(
-          data: queryData
-              .removeViewInsets(removeBottom: true)
-              .removeViewPadding(removeBottom: true),
-          child: _currentPage ?? tabs[_currentPageName]!),
-      extendBody: true,
-      bottomNavigationBar: FloatingNavbar(
+      body: _currentPage ?? tabs[_currentPageName],
+      bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (i) => setState(() {
           _currentPage = null;
@@ -141,70 +148,45 @@ class _NavBarPageState extends State<NavBarPage> {
         backgroundColor: Colors.white,
         selectedItemColor: const Color(0xFF404020),
         unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
-        selectedBackgroundColor: const Color(0x00000000),
-        borderRadius: 30.0,
-        itemBorderRadius: 8.0,
-        margin: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
-        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-        width: double.infinity,
-        elevation: 0.0,
-        items: [
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.home_outlined,
-                  color: currentIndex == 0
-                      ? const Color(0xFF404020)
-                      : FlutterFlowTheme.of(context).secondaryText,
-                  size: 24.0,
-                ),
-                const Text(
-                  'Home',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(),
-                ),
-              ],
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_rounded,
+              size: 27.0,
             ),
+            activeIcon: Icon(
+              Icons.home_rounded,
+              size: 29.0,
+            ),
+            label: 'Home',
+            tooltip: '',
           ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.menu_book_rounded,
-                  color: currentIndex == 1
-                      ? const Color(0xFF404020)
-                      : FlutterFlowTheme.of(context).secondaryText,
-                  size: 24.0,
-                ),
-                const Text(
-                  'Messmenu',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(),
-                ),
-              ],
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.menu_book_rounded,
+              size: 27.0,
             ),
+            activeIcon: Icon(
+              Icons.menu_book_rounded,
+              size: 29.0,
+            ),
+            label: 'Messmenu',
+            tooltip: '',
           ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.settings_rounded,
-                  color: currentIndex == 2
-                      ? const Color(0xFF404020)
-                      : FlutterFlowTheme.of(context).secondaryText,
-                  size: 24.0,
-                ),
-                const Text(
-                  'Settings',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(),
-                ),
-              ],
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings_rounded,
+              size: 27.0,
             ),
+            activeIcon: Icon(
+              Icons.settings_rounded,
+              size: 29.0,
+            ),
+            label: 'Settings',
+            tooltip: '',
           )
         ],
       ),

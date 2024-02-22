@@ -1,30 +1,32 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'profile_model.dart';
-export 'profile_model.dart';
+import 'settings_model.dart';
+export 'settings_model.dart';
 
-class ProfileWidget extends StatefulWidget {
-  const ProfileWidget({super.key});
+class SettingsWidget extends StatefulWidget {
+  const SettingsWidget({super.key});
 
   @override
-  _ProfileWidgetState createState() => _ProfileWidgetState();
+  State<SettingsWidget> createState() => _SettingsWidgetState();
 }
 
-class _ProfileWidgetState extends State<ProfileWidget> {
-  late ProfileModel _model;
+class _SettingsWidgetState extends State<SettingsWidget> {
+  late SettingsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfileModel());
+    _model = createModel(context, () => SettingsModel());
   }
 
   @override
@@ -57,7 +59,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 height: 200.0,
@@ -138,28 +141,37 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                child: Text(
-                  'SRM AP - University',
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Open Sans',
-                        fontWeight: FontWeight.w600,
-                      ),
+              Align(
+                alignment: const AlignmentDirectional(-1.0, -1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    'SRM AP - University',
+                    style: FlutterFlowTheme.of(context).headlineMedium.override(
+                          fontFamily: 'Ubuntu',
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 16.0),
-                child: Text(
-                  'Mess Application',
-                  style: FlutterFlowTheme.of(context).labelMedium,
+              Align(
+                alignment: const AlignmentDirectional(-1.0, -1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 16.0),
+                  child: Text(
+                    'Mess Application',
+                    style: FlutterFlowTheme.of(context).labelMedium,
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
-                child: Text(
-                  'General',
-                  style: FlutterFlowTheme.of(context).labelMedium,
+              Align(
+                alignment: const AlignmentDirectional(-1.0, -1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
+                  child: Text(
+                    'General',
+                    style: FlutterFlowTheme.of(context).labelMedium,
+                  ),
                 ),
               ),
               Builder(
@@ -182,11 +194,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       height: 60.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
                             blurRadius: 3.0,
-                            color: Color(0x33000000),
-                            offset: Offset(0.0, 1.0),
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            offset: const Offset(0.0, 1.0),
                           )
                         ],
                         borderRadius: BorderRadius.circular(8.0),
@@ -210,7 +222,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(
-                                      fontFamily: 'Open Sans',
+                                      fontFamily: 'Ubuntu',
                                       fontSize: 16.0,
                                     ),
                               ),
@@ -251,7 +263,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       boxShadow: const [
                         BoxShadow(
                           blurRadius: 3.0,
-                          color: Color(0x33000000),
+                          color: Color(0xFF57636C),
                           offset: Offset(0.0, 1.0),
                         )
                       ],
@@ -276,7 +288,85 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
-                                    fontFamily: 'Open Sans',
+                                    fontFamily: 'Ubuntu',
+                                    fontSize: 16.0,
+                                  ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: const AlignmentDirectional(0.9, 0.0),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 18.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Feature is on the way!!',
+                          style:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Ubuntu',
+                                    color: Colors.white,
+                                  ),
+                        ),
+                        duration: const Duration(milliseconds: 4000),
+                        backgroundColor: const Color(0xFF404020),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 3.0,
+                          color: Color(0xFF57636C),
+                          offset: Offset(0.0, 1.0),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(8.0),
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.storefront_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Night Canteen',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelLarge
+                                  .override(
+                                    fontFamily: 'Ubuntu',
                                     fontSize: 16.0,
                                   ),
                             ),
@@ -317,7 +407,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       boxShadow: const [
                         BoxShadow(
                           blurRadius: 3.0,
-                          color: Color(0x33000000),
+                          color: Color(0xFF57636C),
                           offset: Offset(0.0, 1.0),
                         )
                       ],
@@ -342,7 +432,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
-                                    fontFamily: 'Open Sans',
+                                    fontFamily: 'Ubuntu',
                                     fontSize: 16.0,
                                   ),
                             ),
@@ -383,7 +473,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       boxShadow: const [
                         BoxShadow(
                           blurRadius: 3.0,
-                          color: Color(0x33000000),
+                          color: Color(0xFF57636C),
                           offset: Offset(0.0, 1.0),
                         )
                       ],
@@ -408,7 +498,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
-                                    fontFamily: 'Open Sans',
+                                    fontFamily: 'Ubuntu',
                                     fontSize: 16.0,
                                   ),
                             ),
@@ -430,11 +520,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 0.0, 0.0),
-                child: Text(
-                  'App Settings',
-                  style: FlutterFlowTheme.of(context).labelMedium,
+              Align(
+                alignment: const AlignmentDirectional(-1.0, -1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 0.0, 0.0),
+                  child: Text(
+                    'App Settings',
+                    style: FlutterFlowTheme.of(context).labelMedium,
+                  ),
                 ),
               ),
               Padding(
@@ -464,7 +557,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       boxShadow: const [
                         BoxShadow(
                           blurRadius: 3.0,
-                          color: Color(0x33000000),
+                          color: Color(0xFF57636C),
                           offset: Offset(0.0, 1.0),
                         )
                       ],
@@ -514,7 +607,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    await launchURL('https://srmapmess.vercel.app/');
+                    unawaited(
+                      () async {
+                        await launchURL('https://srmapmess.vercel.app/');
+                      }(),
+                    );
                   },
                   child: Container(
                     width: double.infinity,
@@ -524,7 +621,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       boxShadow: const [
                         BoxShadow(
                           blurRadius: 3.0,
-                          color: Color(0x33000000),
+                          color: Color(0xFF57636C),
                           offset: Offset(0.0, 1.0),
                         )
                       ],
@@ -566,7 +663,152 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                 ),
               ),
-            ],
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    unawaited(
+                      () async {
+                        if (currentUserEmail.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Email required!',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+                        await authManager.resetPassword(
+                          email: currentUserEmail,
+                          context: context,
+                        );
+                      }(),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 3.0,
+                          color: Color(0xFF57636C),
+                          offset: Offset(0.0, 1.0),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(8.0),
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.lock_reset_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Reset Password',
+                              style: FlutterFlowTheme.of(context).labelLarge,
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: const AlignmentDirectional(0.9, 0.0),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 18.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 15.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    unawaited(
+                      () async {
+                        GoRouter.of(context).prepareAuthEvent();
+                        await authManager.signOut();
+                        GoRouter.of(context).clearRedirectLocation();
+                      }(),
+                    );
+
+                    context.goNamedAuth('OnBoarding', context.mounted);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 3.0,
+                          color: Color(0xFF57636C),
+                          offset: Offset(0.0, 1.0),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(8.0),
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.logout_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Logout',
+                              style: FlutterFlowTheme.of(context).labelLarge,
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: const AlignmentDirectional(0.9, 0.0),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 18.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ].divide(const SizedBox(height: 1.0)).around(const SizedBox(height: 1.0)),
           ),
         ),
       ),

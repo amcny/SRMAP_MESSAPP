@@ -1,11 +1,10 @@
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_ad_banner.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -14,7 +13,7 @@ class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
 
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
@@ -26,15 +25,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().name == '') {
-        context.pushNamed('dropdown');
-      } else {
-        return;
-      }
-    });
   }
 
   @override
@@ -179,7 +169,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
                                               .override(
-                                                fontFamily: 'Open Sans',
+                                                fontFamily: 'Ubuntu',
                                                 color: Colors.white,
                                                 fontSize: 23.0,
                                                 fontWeight: FontWeight.w500,
@@ -193,17 +183,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Text(
-                                            'Hope you are having Great Day',
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  color: Colors.white,
-                                                  fontSize: 15.0,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: Text(
+                                              'Hope you are having Great Day',
+                                              textAlign: TextAlign.start,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color: Colors.white,
+                                                        fontSize: 15.0,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                      ),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -241,7 +238,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
-                                  fontFamily: 'Open Sans',
+                                  fontFamily: 'Ubuntu',
                                   color: Colors.white,
                                 ),
                           ),
@@ -249,12 +246,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                     ),
                   ),
-                ),
-                FlutterFlowAdBanner(
-                  width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: 60.0,
-                  showsTestAd: false,
-                  androidAdUnitID: 'ca-app-pub-3654957842084949/3966044987',
                 ),
                 StreamBuilder<List<MessRecord>>(
                   stream: queryMessRecord(
@@ -276,14 +267,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
-                      return Center(
+                      return const Center(
                         child: SizedBox(
                           width: 50.0,
                           height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
-                            ),
+                          child: SpinKitRipple(
+                            color: Color(0xFF404020),
+                            size: 50.0,
                           ),
                         ),
                       );
@@ -295,6 +285,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     return SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Builder(
                             builder: (context) {
@@ -305,7 +296,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   0,
                                   15.0,
                                   0,
-                                  50.0,
+                                  20.0,
                                 ),
                                 primary: false,
                                 shrinkWrap: true,
@@ -356,7 +347,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           context)
                                                       .titleMedium
                                                       .override(
-                                                        fontFamily: 'Open Sans',
+                                                        fontFamily: 'Ubuntu',
                                                         color: Colors.white,
                                                       ),
                                                 ),
@@ -392,7 +383,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               );
                             },
                           ),
-                        ].addToEnd(const SizedBox(height: 50.0)),
+                        ].addToEnd(const SizedBox(height: 15.0)),
                       ),
                     );
                   },

@@ -22,7 +22,7 @@
           }
         },
         {
-          "client_id": "383468578019-12oq01vqg49cl0aholkikgpshpu2jbgp.apps.googleusercontent.com",
+          "client_id": "383468578019-gjimgl7uvgons45djibhvdnsl8efdudi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "383468578019-b42kv0kpetr2u60m83i03t41ol3mo6np.apps.googleusercontent.com",
+              "client_id": "383468578019-1mtl5cp4mbnnrgffei25cuct6og603g7.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.srmapmess.app"
+                "bundle_id": "com.mycompany.orderrecieve"
               }
             }
           ]
