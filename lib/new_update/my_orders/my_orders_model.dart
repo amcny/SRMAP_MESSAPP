@@ -1,15 +1,11 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'canteen_copy_widget.dart' show CanteenCopyWidget;
+import 'my_orders_widget.dart' show MyOrdersWidget;
 import 'package:flutter/material.dart';
 
-class CanteenCopyModel extends FlutterFlowModel<CanteenCopyWidget> {
+class MyOrdersModel extends FlutterFlowModel<MyOrdersWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -19,8 +15,6 @@ class CanteenCopyModel extends FlutterFlowModel<CanteenCopyWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
   }
 
   /// Action blocks are added here.

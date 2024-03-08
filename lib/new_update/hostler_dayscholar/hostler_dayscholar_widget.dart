@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'hostler_dayscholar_model.dart';
@@ -29,6 +28,8 @@ class _HostlerDayscholarWidgetState extends State<HostlerDayscholarWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HostlerDayscholarModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -40,15 +41,6 @@ class _HostlerDayscholarWidgetState extends State<HostlerDayscholarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -152,9 +144,11 @@ class _HostlerDayscholarWidgetState extends State<HostlerDayscholarWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    FFAppState().update(() {
+                    setState(() {
                       FFAppState().DayscholarHostler = _model.hosDayValue!;
                     });
+
+                    context.goNamed('dropdown');
 
                     await HostlerDayscholarRecord.collection
                         .doc(currentUserEmail)
@@ -162,8 +156,6 @@ class _HostlerDayscholarWidgetState extends State<HostlerDayscholarWidget> {
                           hosDayscholar: _model.hosDayValue,
                           hostelName: _model.vedaT2Value,
                         ));
-
-                    context.goNamed('dropdown');
                   },
                   text: 'Save',
                   options: FFButtonOptions(

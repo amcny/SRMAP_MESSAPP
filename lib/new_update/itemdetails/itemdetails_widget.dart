@@ -1,11 +1,10 @@
 import '/backend/backend.dart';
+import '/components/count_controller/count_controller_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'itemdetails_model.dart';
 export 'itemdetails_model.dart';
 
@@ -30,6 +29,8 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ItemdetailsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -41,17 +42,6 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -70,7 +60,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
             icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
-              size: 28.0,
+              size: 30.0,
             ),
             onPressed: () async {
               context.pop();
@@ -105,7 +95,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                     BoxShadow(
                       blurRadius: 4.0,
                       color: Color(0x33000000),
-                      offset: Offset(0.0, 2.0),
+                      offset: Offset(2.0, 2.0),
                     )
                   ],
                   borderRadius: const BorderRadius.only(
@@ -129,7 +119,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                         child: Image.network(
                           widget.itemSelection!.image,
                           width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: 300.0,
+                          height: 275.0,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -148,7 +138,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Ubuntu',
-                                    fontSize: 24.0,
+                                    fontSize: 20.0,
                                   ),
                         ),
                       ),
@@ -170,7 +160,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Ubuntu',
-                                    fontSize: 24.0,
+                                    fontSize: 19.0,
                                   ),
                         ),
                       ),
@@ -192,10 +182,15 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Ubuntu',
-                                    fontSize: 21.0,
+                                    fontSize: 20.0,
                                   ),
                         ),
                       ),
+                    ),
+                    wrapWithModel(
+                      model: _model.countControllerModel,
+                      updateCallback: () => setState(() {}),
+                      child: const CountControllerWidget(),
                     ),
                   ],
                 ),
@@ -203,8 +198,38 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    setState(() {
+                      FFAppState().addToCart(CartItemTypeStruct(
+                        menuItems: widget.itemSelection?.reference,
+                        quantity:
+                            _model.countControllerModel.countControllerValue,
+                      ));
+                    });
+                    FFAppState().update(() {
+                      FFAppState().cartSum = FFAppState().cartSum +
+                          widget.itemSelection!.price *
+                              (_model
+                                  .countControllerModel.countControllerValue!);
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Item added to cart',
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        duration: const Duration(milliseconds: 1000),
+                        backgroundColor: const Color(0xFF6F6F42),
+                      ),
+                    );
+                    FFAppState().update(() {
+                      FFAppState().numberOfItemsinCart =
+                          FFAppState().numberOfItemsinCart + 1;
+                    });
                   },
                   text: 'Add to Cart',
                   options: FFButtonOptions(
@@ -218,7 +243,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Ubuntu',
                           color: Colors.white,
-                          fontSize: 23.0,
+                          fontSize: 21.0,
                         ),
                     elevation: 3.0,
                     borderSide: const BorderSide(

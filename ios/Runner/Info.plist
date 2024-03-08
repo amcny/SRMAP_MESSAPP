@@ -53,11 +53,17 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
 	<key>NSCameraUsageDescription</key>
-    <string>Allow SRMAP:Mess App to access your camera</string>
+    <string>In order to take a picture or video, this app requires permission to access the camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>Allow SRMAP:Mess App to access your Photos</string>
+	<key>PermissionGroupNotification</key>
+    <string>Allow SRMAP:Mess App to send you notifications</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 
 
 	<key>UILaunchStoryboardName</key>

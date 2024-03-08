@@ -6,6 +6,8 @@ import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
+import '/backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -73,13 +75,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const OnBoardingWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const AuthenticationWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const OnBoardingWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const AuthenticationWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -147,9 +149,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AuthenticationWidget(),
         ),
         FFRoute(
-          name: 'canteenCopy',
-          path: '/canteenCopy',
-          builder: (context, params) => const CanteenCopyWidget(),
+          name: 'MyOrders',
+          path: '/myOrders',
+          builder: (context, params) => MyOrdersWidget(
+            listHasOrders: params.getParam('listHasOrders', ParamType.bool),
+          ),
+        ),
+        FFRoute(
+          name: 'carts',
+          path: '/carts',
+          builder: (context, params) => const CartsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -316,11 +325,12 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/onBoarding';
+            return '/authentication';
           }
           return null;
         },
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(
@@ -336,7 +346,7 @@ class FFRoute {
                     fit: BoxFit.contain,
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition

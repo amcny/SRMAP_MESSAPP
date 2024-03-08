@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'email_verfication_model.dart';
 export 'email_verfication_model.dart';
 
@@ -27,6 +26,8 @@ class _EmailVerficationWidgetState extends State<EmailVerficationWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EmailVerficationModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -38,15 +39,13 @@ class _EmailVerficationWidgetState extends State<EmailVerficationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
         child: Container(
           width: double.infinity,
-          height: 350.0,
+          height: 300.0,
           constraints: const BoxConstraints(
             maxWidth: 570.0,
           ),
@@ -112,21 +111,28 @@ class _EmailVerficationWidgetState extends State<EmailVerficationWidget> {
                           onPressed: () async {
                             await authManager.refreshUser();
                             if (currentUserEmailVerified) {
-                              context.pushNamed('hostler_dayscholar');
+                              context.pushNamed(
+                                'hostler_dayscholar',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'E-Mail not yet verified',
+                                    'Get your email verified',
                                     style: TextStyle(
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 18.0,
+                                          .secondaryBackground,
                                     ),
                                   ),
-                                  duration: const Duration(milliseconds: 800),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
+                                  duration: const Duration(milliseconds: 100),
+                                  backgroundColor: const Color(0xFF404020),
                                 ),
                               );
                             }

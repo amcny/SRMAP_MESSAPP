@@ -8,9 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
 import 'authentication_model.dart';
 export 'authentication_model.dart';
 
@@ -121,6 +119,8 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
 
     _model.passwordCreateController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -132,17 +132,6 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -213,7 +202,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
               Align(
                 alignment: const AlignmentDirectional(0.0, -1.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 170.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 180.0, 0.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -224,7 +213,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                               12.0, 75.0, 12.0, 12.0),
                           child: Container(
                             width: double.infinity,
-                            height: 500.0,
+                            height: 650.0,
                             constraints: const BoxConstraints(
                               maxWidth: 570.0,
                             ),
@@ -633,7 +622,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                           return;
                                                         }
 
-                                                        context.goNamedAuth(
+                                                        context.pushNamedAuth(
                                                             'dropdown',
                                                             context.mounted);
                                                       },
@@ -1224,6 +1213,8 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                                 0.0, 16.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
+                                                        Function() navigate =
+                                                            () {};
                                                         if (functions
                                                             .verifyEmail(_model
                                                                 .emailAddressCreateController
@@ -1261,32 +1252,13 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                                     getCurrentTimestamp,
                                                               ));
 
+                                                          navigate = () =>
+                                                              context.goNamedAuth(
+                                                                  'HomePage',
+                                                                  context
+                                                                      .mounted);
                                                           await authManager
                                                               .sendEmailVerification();
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              content: Text(
-                                                                'Check your inbox to get verified',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                  fontSize:
-                                                                      18.0,
-                                                                ),
-                                                              ),
-                                                              duration: const Duration(
-                                                                  milliseconds:
-                                                                      900),
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
-                                                            ),
-                                                          );
                                                           await showModalBottomSheet(
                                                             isScrollControlled:
                                                                 true,
@@ -1312,12 +1284,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                                       .viewInsetsOf(
                                                                           context),
                                                                   child:
-                                                                      const SizedBox(
-                                                                    height:
-                                                                        500.0,
-                                                                    child:
-                                                                        EmailVerficationWidget(),
-                                                                  ),
+                                                                      const EmailVerficationWidget(),
                                                                 ),
                                                               );
                                                             },
@@ -1330,24 +1297,25 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                               .showSnackBar(
                                                             SnackBar(
                                                               content: Text(
-                                                                'Enter valid E-Mail address',
+                                                                'Enter valid E-mail address',
                                                                 style:
                                                                     TextStyle(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primaryText,
+                                                                      .secondaryBackground,
                                                                 ),
                                                               ),
                                                               duration: const Duration(
                                                                   milliseconds:
-                                                                      4000),
+                                                                      900),
                                                               backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
+                                                                  const Color(
+                                                                      0xFF404020),
                                                             ),
                                                           );
                                                         }
+
+                                                        navigate();
                                                       },
                                                       text: 'Sign Up',
                                                       options: FFButtonOptions(

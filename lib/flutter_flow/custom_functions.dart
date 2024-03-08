@@ -11,6 +11,7 @@ import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
 String? day() {
@@ -34,13 +35,6 @@ String? wishes() {
   } else {
     return 'Good Evening, ';
   }
-}
-
-double? getNegative(double? price) {
-  if (price == null) {
-    return 0;
-  }
-  return price * -1;
 }
 
 bool verifyEmail(String? email) {

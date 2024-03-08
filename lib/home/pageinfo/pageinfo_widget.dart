@@ -3,9 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/provider.dart';
 import 'pageinfo_model.dart';
 export 'pageinfo_model.dart';
 
@@ -30,6 +28,8 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PageinfoModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -41,17 +41,6 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return StreamBuilder<MessRecord>(
       stream: MessRecord.getDocument(widget.pass!),
       builder: (context, snapshot) {

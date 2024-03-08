@@ -8,9 +8,9 @@ import 'schema/util/firestore_util.dart';
 import 'schema/mess_record.dart';
 import 'schema/users_record.dart';
 import 'schema/menu_items_record.dart';
-import 'schema/carts_record.dart';
 import 'schema/items_details_record.dart';
 import 'schema/hostler_dayscholar_record.dart';
+import 'schema/my_orders_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,9 +21,9 @@ export 'schema/util/schema_util.dart';
 export 'schema/mess_record.dart';
 export 'schema/users_record.dart';
 export 'schema/menu_items_record.dart';
-export 'schema/carts_record.dart';
 export 'schema/items_details_record.dart';
 export 'schema/hostler_dayscholar_record.dart';
+export 'schema/my_orders_record.dart';
 
 /// Functions to query MessRecords (as a Stream and as a Future).
 Future<int> queryMessRecordCount({
@@ -136,43 +136,6 @@ Future<List<MenuItemsRecord>> queryMenuItemsRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query CartsRecords (as a Stream and as a Future).
-Future<int> queryCartsRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      CartsRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<CartsRecord>> queryCartsRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      CartsRecord.collection,
-      CartsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<CartsRecord>> queryCartsRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      CartsRecord.collection,
-      CartsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query ItemsDetailsRecords (as a Stream and as a Future).
 Future<int> queryItemsDetailsRecordCount({
   Query Function(Query)? queryBuilder,
@@ -247,6 +210,43 @@ Future<List<HostlerDayscholarRecord>> queryHostlerDayscholarRecordOnce({
       singleRecord: singleRecord,
     );
 
+/// Functions to query MyOrdersRecords (as a Stream and as a Future).
+Future<int> queryMyOrdersRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      MyOrdersRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<MyOrdersRecord>> queryMyOrdersRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      MyOrdersRecord.collection,
+      MyOrdersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<MyOrdersRecord>> queryMyOrdersRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      MyOrdersRecord.collection,
+      MyOrdersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
 Future<int> queryCollectionCount(
   Query collection, {
   Query Function(Query)? queryBuilder,
@@ -260,7 +260,7 @@ Future<int> queryCollectionCount(
 
   return query.count().get().catchError((err) {
     print('Error querying $collection: $err');
-  }).then((value) => value.count);
+  }).then((value) => value.count!);
 }
 
 Stream<List<T>> queryCollection<T>(

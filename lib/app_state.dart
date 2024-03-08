@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -42,13 +44,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_name', value);
   }
 
-  double _sum = 0.0;
-  double get sum => _sum;
-  set sum(double value) {
-    _sum = value;
-  }
-
-  String _DayscholarHostler = '';
+  String _DayscholarHostler = 'Day Scholar';
   String get DayscholarHostler => _DayscholarHostler;
   set DayscholarHostler(String value) {
     _DayscholarHostler = value;
@@ -74,10 +70,45 @@ class FFAppState extends ChangeNotifier {
     _VerifyEmailAddress = value;
   }
 
-  bool _BTNstatus = false;
-  bool get BTNstatus => _BTNstatus;
-  set BTNstatus(bool value) {
-    _BTNstatus = value;
+  List<CartItemTypeStruct> _cart = [];
+  List<CartItemTypeStruct> get cart => _cart;
+  set cart(List<CartItemTypeStruct> value) {
+    _cart = value;
+  }
+
+  void addToCart(CartItemTypeStruct value) {
+    _cart.add(value);
+  }
+
+  void removeFromCart(CartItemTypeStruct value) {
+    _cart.remove(value);
+  }
+
+  void removeAtIndexFromCart(int index) {
+    _cart.removeAt(index);
+  }
+
+  void updateCartAtIndex(
+    int index,
+    CartItemTypeStruct Function(CartItemTypeStruct) updateFn,
+  ) {
+    _cart[index] = updateFn(_cart[index]);
+  }
+
+  void insertAtIndexInCart(int index, CartItemTypeStruct value) {
+    _cart.insert(index, value);
+  }
+
+  double _cartSum = 0.0;
+  double get cartSum => _cartSum;
+  set cartSum(double value) {
+    _cartSum = value;
+  }
+
+  int _numberOfItemsinCart = 0;
+  int get numberOfItemsinCart => _numberOfItemsinCart;
+  set numberOfItemsinCart(int value) {
+    _numberOfItemsinCart = value;
   }
 }
 

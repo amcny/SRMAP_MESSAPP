@@ -50,11 +50,6 @@ class ItemsDetailsRecord extends FirestoreRecord {
   int get quantity => _quantity ?? 0;
   bool hasQuantity() => _quantity != null;
 
-  // "cartRef" field.
-  DocumentReference? _cartRef;
-  DocumentReference? get cartRef => _cartRef;
-  bool hasCartRef() => _cartRef != null;
-
   // "menuItemRef" field.
   DocumentReference? _menuItemRef;
   DocumentReference? get menuItemRef => _menuItemRef;
@@ -78,7 +73,6 @@ class ItemsDetailsRecord extends FirestoreRecord {
     _onSale = snapshotData['on_sale'] as bool?;
     _salePrice = castToType<double>(snapshotData['sale_price']);
     _quantity = castToType<int>(snapshotData['quantity']);
-    _cartRef = snapshotData['cartRef'] as DocumentReference?;
     _menuItemRef = snapshotData['menuItemRef'] as DocumentReference?;
     _modifier = getDataList(snapshotData['modifier']);
     _modifier1 = getDataList(snapshotData['modifier_1']);
@@ -126,7 +120,6 @@ Map<String, dynamic> createItemsDetailsRecordData({
   bool? onSale,
   double? salePrice,
   int? quantity,
-  DocumentReference? cartRef,
   DocumentReference? menuItemRef,
 }) {
   final firestoreData = mapToFirestore(
@@ -138,7 +131,6 @@ Map<String, dynamic> createItemsDetailsRecordData({
       'on_sale': onSale,
       'sale_price': salePrice,
       'quantity': quantity,
-      'cartRef': cartRef,
       'menuItemRef': menuItemRef,
     }.withoutNulls,
   );
@@ -160,7 +152,6 @@ class ItemsDetailsRecordDocumentEquality
         e1?.onSale == e2?.onSale &&
         e1?.salePrice == e2?.salePrice &&
         e1?.quantity == e2?.quantity &&
-        e1?.cartRef == e2?.cartRef &&
         e1?.menuItemRef == e2?.menuItemRef &&
         listEquality.equals(e1?.modifier, e2?.modifier) &&
         listEquality.equals(e1?.modifier1, e2?.modifier1);
@@ -175,7 +166,6 @@ class ItemsDetailsRecordDocumentEquality
         e?.onSale,
         e?.salePrice,
         e?.quantity,
-        e?.cartRef,
         e?.menuItemRef,
         e?.modifier,
         e?.modifier1

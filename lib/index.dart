@@ -11,5 +11,5 @@ export '/new_update/canteen/canteen_widget.dart' show CanteenWidget;
 export '/new_update/itemdetails/itemdetails_widget.dart' show ItemdetailsWidget;
 export '/new_update/authentication/authentication_widget.dart'
     show AuthenticationWidget;
-export '/new_update/canteen_copy/canteen_copy_widget.dart'
-    show CanteenCopyWidget;
+export '/new_update/my_orders/my_orders_widget.dart' show MyOrdersWidget;
+export '/new_update/carts/carts_widget.dart' show CartsWidget;

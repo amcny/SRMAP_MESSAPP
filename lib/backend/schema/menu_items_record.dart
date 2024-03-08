@@ -50,10 +50,10 @@ class MenuItemsRecord extends FirestoreRecord {
   int get itemId => _itemId ?? 0;
   bool hasItemId() => _itemId != null;
 
-  // "listOfItems" field.
-  List<MenuItemStruct>? _listOfItems;
-  List<MenuItemStruct> get listOfItems => _listOfItems ?? const [];
-  bool hasListOfItems() => _listOfItems != null;
+  // "categoryID" field.
+  int? _categoryID;
+  int get categoryID => _categoryID ?? 0;
+  bool hasCategoryID() => _categoryID != null;
 
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
@@ -63,10 +63,7 @@ class MenuItemsRecord extends FirestoreRecord {
     _image = snapshotData['image'] as String?;
     _category = snapshotData['category'] as String?;
     _itemId = castToType<int>(snapshotData['itemId']);
-    _listOfItems = getStructList(
-      snapshotData['listOfItems'],
-      MenuItemStruct.fromMap,
-    );
+    _categoryID = castToType<int>(snapshotData['categoryID']);
   }
 
   static CollectionReference get collection =>
@@ -111,6 +108,7 @@ Map<String, dynamic> createMenuItemsRecordData({
   String? image,
   String? category,
   int? itemId,
+  int? categoryID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -121,6 +119,7 @@ Map<String, dynamic> createMenuItemsRecordData({
       'image': image,
       'category': category,
       'itemId': itemId,
+      'categoryID': categoryID,
     }.withoutNulls,
   );
 
@@ -132,7 +131,6 @@ class MenuItemsRecordDocumentEquality implements Equality<MenuItemsRecord> {
 
   @override
   bool equals(MenuItemsRecord? e1, MenuItemsRecord? e2) {
-    const listEquality = ListEquality();
     return e1?.name == e2?.name &&
         e1?.price == e2?.price &&
         e1?.onSale == e2?.onSale &&
@@ -140,7 +138,7 @@ class MenuItemsRecordDocumentEquality implements Equality<MenuItemsRecord> {
         e1?.image == e2?.image &&
         e1?.category == e2?.category &&
         e1?.itemId == e2?.itemId &&
-        listEquality.equals(e1?.listOfItems, e2?.listOfItems);
+        e1?.categoryID == e2?.categoryID;
   }
 
   @override
@@ -152,7 +150,7 @@ class MenuItemsRecordDocumentEquality implements Equality<MenuItemsRecord> {
         e?.image,
         e?.category,
         e?.itemId,
-        e?.listOfItems
+        e?.categoryID
       ]);
 
   @override
