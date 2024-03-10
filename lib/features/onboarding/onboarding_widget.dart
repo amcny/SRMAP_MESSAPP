@@ -8,19 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'on_boarding_model.dart';
-export 'on_boarding_model.dart';
+import 'onboarding_model.dart';
+export 'onboarding_model.dart';
 
-class OnBoardingWidget extends StatefulWidget {
-  const OnBoardingWidget({super.key});
+class OnboardingWidget extends StatefulWidget {
+  const OnboardingWidget({super.key});
 
   @override
-  State<OnBoardingWidget> createState() => _OnBoardingWidgetState();
+  State<OnboardingWidget> createState() => _OnboardingWidgetState();
 }
 
-class _OnBoardingWidgetState extends State<OnBoardingWidget>
+class _OnboardingWidgetState extends State<OnboardingWidget>
     with TickerProviderStateMixin {
-  late OnBoardingModel _model;
+  late OnboardingModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -213,14 +213,12 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => OnBoardingModel());
+    _model = createModel(context, () => OnboardingModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('Authentication');
+      context.pushNamed('authentication');
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -590,7 +588,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget>
                           const EdgeInsetsDirectional.fromSTEB(16.0, 25.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('Authentication');
+                          context.pushNamed('authentication');
                         },
                         text: 'Next',
                         options: FFButtonOptions(

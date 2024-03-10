@@ -5,6 +5,7 @@ enum OrderStatus {
   Accepted,
   Completed,
   Cancelled,
+  Delivered,
 }
 
 extension FFEnumExtensions<T extends Enum> on T {

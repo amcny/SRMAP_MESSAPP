@@ -29,8 +29,6 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ItemdetailsModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -199,11 +197,13 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    setState(() {
+                    FFAppState().update(() {
                       FFAppState().addToCart(CartItemTypeStruct(
                         menuItems: widget.itemSelection?.reference,
                         quantity:
                             _model.countControllerModel.countControllerValue,
+                        itemName: widget.itemSelection?.name,
+                        itemPrice: widget.itemSelection?.price,
                       ));
                     });
                     FFAppState().update(() {
@@ -222,7 +222,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        duration: const Duration(milliseconds: 1000),
+                        duration: const Duration(milliseconds: 500),
                         backgroundColor: const Color(0xFF6F6F42),
                       ),
                     );

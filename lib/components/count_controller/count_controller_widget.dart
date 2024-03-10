@@ -26,8 +26,6 @@ class _CountControllerWidgetState extends State<CountControllerWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CountControllerModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

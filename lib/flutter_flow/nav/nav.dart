@@ -84,11 +84,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? const NavBarPage() : const AuthenticationWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
+          name: 'homepage',
+          path: '/homepage',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'HomePage')
-              : const HomePageWidget(),
+              ? const NavBarPage(initialPage: 'homepage')
+              : const HomepageWidget(),
         ),
         FFRoute(
           name: 'mainindex',
@@ -106,26 +106,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'Settings',
+          name: 'settings',
           path: '/settings',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Settings')
+              ? const NavBarPage(initialPage: 'settings')
               : const SettingsWidget(),
         ),
         FFRoute(
-          name: 'dropdown',
-          path: '/dropdown',
-          builder: (context, params) => const DropdownWidget(),
+          name: 'choosemess',
+          path: '/choosemess',
+          builder: (context, params) => const ChoosemessWidget(),
         ),
         FFRoute(
-          name: 'OnBoarding',
-          path: '/onBoarding',
-          builder: (context, params) => const OnBoardingWidget(),
+          name: 'onboarding',
+          path: '/onboarding',
+          builder: (context, params) => const OnboardingWidget(),
         ),
         FFRoute(
-          name: 'hostler_dayscholar',
-          path: '/hostlerDayscholar',
-          builder: (context, params) => const HostlerDayscholarWidget(),
+          name: 'hostler_dayscholor',
+          path: '/hostlerDayscholor',
+          builder: (context, params) => const HostlerDayscholorWidget(),
         ),
         FFRoute(
           name: 'canteen',
@@ -144,14 +144,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'Authentication',
+          name: 'authentication',
           path: '/authentication',
           builder: (context, params) => const AuthenticationWidget(),
         ),
         FFRoute(
-          name: 'MyOrders',
-          path: '/myOrders',
-          builder: (context, params) => MyOrdersWidget(
+          name: 'myorders',
+          path: '/myorders',
+          builder: (context, params) => MyordersWidget(
             listHasOrders: params.getParam('listHasOrders', ParamType.bool),
           ),
         ),
@@ -159,6 +159,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'carts',
           path: '/carts',
           builder: (context, params) => const CartsWidget(),
+        ),
+        FFRoute(
+          name: 'canteentest',
+          path: '/canteentest',
+          builder: (context, params) => const CanteentestWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

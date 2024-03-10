@@ -48,8 +48,6 @@ class _CartsWidgetState extends State<CartsWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => CartsModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -469,112 +467,116 @@ class _CartsWidgetState extends State<CartsWidget>
                         ),
                       ),
                     ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        await processRazorpayPayment(
-                          context,
-                          amount: (FFAppState().cartSum * 100).round(),
-                          currency: 'INR',
-                          userName: currentUserDisplayName,
-                          userEmail: currentUserEmail,
-                          onReceivedResponse: (paymentId) => safeSetState(
-                              () => _model.razorpayPaymentId = paymentId),
-                        );
-
-                        if (_model.razorpayPaymentId != null &&
-                            _model.razorpayPaymentId != '') {
-                          await MyOrdersRecord.collection.doc().set({
-                            ...createMyOrdersRecordData(
-                              orderAmount: FFAppState().cartSum,
-                              orderCreatedDate: dateTimeFromSecondsSinceEpoch(
-                                  getCurrentTimestamp.secondsSinceEpoch),
-                              userRef: currentUserReference,
-                              orderStatus: OrderStatus.Pending,
-                              orderId:
-                                  'GPEMC ${random_data.randomInteger(100000, 999999).toString()}',
-                              hostelName: FFAppState().ChooseHostel,
-                            ),
-                            ...mapToFirestore(
-                              {
-                                'OrderItems': getCartItemTypeListFirestoreData(
-                                  FFAppState().cart,
-                                ),
-                              },
-                            ),
-                          });
-                          setState(() {
-                            FFAppState().cart = [];
-                          });
-                          setState(() {
-                            FFAppState().cartSum = 0.0;
-                          });
-                          setState(() {
-                            FFAppState().numberOfItemsinCart = 0;
-                          });
-
-                          context.pushNamed('MyOrders');
-
-                          triggerPushNotification(
-                            notificationTitle: 'My Orders',
-                            notificationText:
-                                'Check the Order Status of your order',
-                            notificationSound: 'default',
-                            userRefs: [currentUserReference!],
-                            initialPageName: 'MyOrders',
-                            parameterData: {},
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 1.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          await processRazorpayPayment(
+                            context,
+                            amount: (FFAppState().cartSum * 100).round(),
+                            currency: 'INR',
+                            userName: currentUserDisplayName,
+                            userEmail: currentUserEmail,
+                            onReceivedResponse: (paymentId) => safeSetState(
+                                () => _model.razorpayPaymentId = paymentId),
                           );
-                        }
 
-                        setState(() {});
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 150.0,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF44441B),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4.0,
-                              color: Color(0x320E151B),
-                              offset: Offset(0.0, -2.0),
-                            )
-                          ],
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0.0),
-                            bottomRight: Radius.circular(0.0),
-                            topLeft: Radius.circular(45.0),
-                            topRight: Radius.circular(45.0),
+                          if (_model.razorpayPaymentId != null &&
+                              _model.razorpayPaymentId != '') {
+                            await MyOrdersRecord.collection.doc().set({
+                              ...createMyOrdersRecordData(
+                                orderAmount: FFAppState().cartSum,
+                                orderCreatedDate: dateTimeFromSecondsSinceEpoch(
+                                    getCurrentTimestamp.secondsSinceEpoch),
+                                userRef: currentUserReference,
+                                orderStatus: OrderStatus.Pending,
+                                orderId:
+                                    'GPEMC ${random_data.randomInteger(100000, 999999).toString()}',
+                                hostelName: FFAppState().ChooseHostel,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'OrderItems':
+                                      getCartItemTypeListFirestoreData(
+                                    FFAppState().cart,
+                                  ),
+                                },
+                              ),
+                            });
+                            setState(() {
+                              FFAppState().cart = [];
+                            });
+                            setState(() {
+                              FFAppState().cartSum = 0.0;
+                            });
+                            setState(() {
+                              FFAppState().numberOfItemsinCart = 0;
+                            });
+
+                            context.pushNamed('myorders');
+
+                            triggerPushNotification(
+                              notificationTitle: 'My Orders',
+                              notificationText:
+                                  'Check the Order Status of your order',
+                              notificationSound: 'default',
+                              userRefs: [currentUserReference!],
+                              initialPageName: 'myorders',
+                              parameterData: {},
+                            );
+                          }
+
+                          setState(() {});
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 150.0,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF44441B),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x320E151B),
+                                offset: Offset(0.0, -2.0),
+                              )
+                            ],
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(0.0),
+                              bottomRight: Radius.circular(0.0),
+                              topLeft: Radius.circular(45.0),
+                              topRight: Radius.circular(45.0),
+                            ),
+                          ),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 32.0),
+                            child: Text(
+                              'Checkout ${formatNumber(
+                                FFAppState().cartSum,
+                                formatType: FormatType.custom,
+                                currency: '₹ ',
+                                format: '',
+                                locale: '',
+                              )}',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 32.0),
-                          child: Text(
-                            'Checkout ${formatNumber(
-                              FFAppState().cartSum,
-                              formatType: FormatType.custom,
-                              currency: '₹ ',
-                              format: '',
-                              locale: '',
-                            )}',
-                            style: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  color: Colors.white,
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                          ),
-                        ),
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation']!),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation']!),
+                    ),
                   ],
                 ),
               ),

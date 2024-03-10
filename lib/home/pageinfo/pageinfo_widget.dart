@@ -28,8 +28,6 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PageinfoModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -126,6 +124,7 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Container(
+                                width: MediaQuery.sizeOf(context).width * 1.0,
                                 height: 40.0,
                                 decoration: const BoxDecoration(
                                   color: Color(0xFF404020),
@@ -136,21 +135,17 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
                                     topRight: Radius.circular(6.0),
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      mealItem.meal,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .override(
-                                            fontFamily: 'Ubuntu',
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ],
+                                child: Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
+                                    mealItem.meal,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          fontFamily: 'Ubuntu',
+                                          color: Colors.white,
+                                        ),
+                                  ),
                                 ),
                               ),
                               Column(

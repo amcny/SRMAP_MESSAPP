@@ -103,17 +103,17 @@ class ParameterData {
 
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
-  'HomePage': ParameterData.none(),
+  'homepage': ParameterData.none(),
   'mainindex': ParameterData.none(),
   'pageinfo': (data) async => ParameterData(
         allParams: {
           'pass': getParameter<DocumentReference>(data, 'pass'),
         },
       ),
-  'Settings': ParameterData.none(),
-  'dropdown': ParameterData.none(),
-  'OnBoarding': ParameterData.none(),
-  'hostler_dayscholar': ParameterData.none(),
+  'settings': ParameterData.none(),
+  'choosemess': ParameterData.none(),
+  'onboarding': ParameterData.none(),
+  'hostler_dayscholor': ParameterData.none(),
   'canteen': ParameterData.none(),
   'itemdetails': (data) async => ParameterData(
         allParams: {
@@ -121,13 +121,14 @@ final parametersBuilderMap =
               data, 'itemSelection', MenuItemsRecord.fromSnapshot),
         },
       ),
-  'Authentication': ParameterData.none(),
-  'MyOrders': (data) async => ParameterData(
+  'authentication': ParameterData.none(),
+  'myorders': (data) async => ParameterData(
         allParams: {
           'listHasOrders': getParameter<bool>(data, 'listHasOrders'),
         },
       ),
   'carts': ParameterData.none(),
+  'canteentest': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

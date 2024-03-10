@@ -13,6 +13,20 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "My_Orders",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "UserRef",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "OrderCreatedDate",
+          "order": "DESCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": [

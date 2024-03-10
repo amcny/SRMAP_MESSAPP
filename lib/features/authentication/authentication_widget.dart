@@ -119,8 +119,6 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
 
     _model.passwordCreateController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -623,7 +621,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                         }
 
                                                         context.pushNamedAuth(
-                                                            'dropdown',
+                                                            'choosemess',
                                                             context.mounted);
                                                       },
                                                       text: 'Log In ',
@@ -1254,7 +1252,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
 
                                                           navigate = () =>
                                                               context.goNamedAuth(
-                                                                  'HomePage',
+                                                                  'homepage',
                                                                   context
                                                                       .mounted);
                                                           await authManager

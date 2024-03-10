@@ -26,8 +26,6 @@ class _EmailVerficationWidgetState extends State<EmailVerficationWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EmailVerficationModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -112,7 +110,7 @@ class _EmailVerficationWidgetState extends State<EmailVerficationWidget> {
                             await authManager.refreshUser();
                             if (currentUserEmailVerified) {
                               context.pushNamed(
-                                'hostler_dayscholar',
+                                'hostler_dayscholor',
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: const TransitionInfo(
                                     hasTransition: true,

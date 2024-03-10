@@ -8,28 +8,26 @@ import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'hostler_dayscholar_model.dart';
-export 'hostler_dayscholar_model.dart';
+import 'hostler_dayscholor_model.dart';
+export 'hostler_dayscholor_model.dart';
 
-class HostlerDayscholarWidget extends StatefulWidget {
-  const HostlerDayscholarWidget({super.key});
+class HostlerDayscholorWidget extends StatefulWidget {
+  const HostlerDayscholorWidget({super.key});
 
   @override
-  State<HostlerDayscholarWidget> createState() =>
-      _HostlerDayscholarWidgetState();
+  State<HostlerDayscholorWidget> createState() =>
+      _HostlerDayscholorWidgetState();
 }
 
-class _HostlerDayscholarWidgetState extends State<HostlerDayscholarWidget> {
-  late HostlerDayscholarModel _model;
+class _HostlerDayscholorWidgetState extends State<HostlerDayscholorWidget> {
+  late HostlerDayscholorModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HostlerDayscholarModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    _model = createModel(context, () => HostlerDayscholorModel());
   }
 
   @override
@@ -148,7 +146,7 @@ class _HostlerDayscholarWidgetState extends State<HostlerDayscholarWidget> {
                       FFAppState().DayscholarHostler = _model.hosDayValue!;
                     });
 
-                    context.goNamed('dropdown');
+                    context.goNamed('choosemess');
 
                     await HostlerDayscholarRecord.collection
                         .doc(currentUserEmail)

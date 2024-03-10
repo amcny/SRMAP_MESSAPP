@@ -5,27 +5,25 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dropdown_model.dart';
-export 'dropdown_model.dart';
+import 'choosemess_model.dart';
+export 'choosemess_model.dart';
 
-class DropdownWidget extends StatefulWidget {
-  const DropdownWidget({super.key});
+class ChoosemessWidget extends StatefulWidget {
+  const ChoosemessWidget({super.key});
 
   @override
-  State<DropdownWidget> createState() => _DropdownWidgetState();
+  State<ChoosemessWidget> createState() => _ChoosemessWidgetState();
 }
 
-class _DropdownWidgetState extends State<DropdownWidget> {
-  late DropdownModel _model;
+class _ChoosemessWidgetState extends State<ChoosemessWidget> {
+  late ChoosemessModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => DropdownModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    _model = createModel(context, () => ChoosemessModel());
   }
 
   @override
@@ -68,27 +66,25 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(15.0, 5.0, 0.0, 0.0),
-                      child: Text(
-                        'Choose Mess ',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Ubuntu',
-                              fontSize: 25.0,
-                            ),
-                      ),
+                Align(
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(15.0, 10.0, 0.0, 0.0),
+                    child: Text(
+                      'Choose Mess ',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Ubuntu',
+                            fontSize: 25.0,
+                          ),
                     ),
-                  ],
+                  ),
                 ),
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(25.0, 5.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(15.0, 10.0, 0.0, 0.0),
                     child: Text(
                       'Please select your mess',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -129,7 +125,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                     margin:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
                     hidesUnderline: true,
-                    isOverButton: true,
+                    isOverButton: false,
                     isSearchable: false,
                     isMultiSelect: false,
                   ),
@@ -142,7 +138,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                         FFAppState().name = _model.dropDownValue!;
                       });
 
-                      context.pushNamed('HomePage');
+                      context.pushNamed('homepage');
                     },
                     text: 'Save',
                     options: FFButtonOptions(

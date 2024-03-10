@@ -1,21 +1,16 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_page_widget.dart' show HomePageWidget;
+import 'my_orders_walkthrough_widget.dart' show MyOrdersWalkthroughWidget;
 import 'package:flutter/material.dart';
 
-class HomePageModel extends FlutterFlowModel<HomePageWidget> {
-  ///  State fields for stateful widgets in this page.
-
-  final unfocusNode = FocusNode();
-
+class MyOrdersWalkthroughModel
+    extends FlutterFlowModel<MyOrdersWalkthroughWidget> {
   /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 
   /// Action blocks are added here.
 

@@ -1,18 +1,18 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'hostler_dayscholar_widget.dart' show HostlerDayscholarWidget;
+import 'canteentest_widget.dart' show CanteentestWidget;
 import 'package:flutter/material.dart';
 
-class HostlerDayscholarModel extends FlutterFlowModel<HostlerDayscholarWidget> {
+class CanteentestModel extends FlutterFlowModel<CanteentestWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for hos-day widget.
-  String? hosDayValue;
-  FormFieldController<String>? hosDayValueController;
-  // State field(s) for veda-T2 widget.
-  String? vedaT2Value;
-  FormFieldController<String>? vedaT2ValueController;
+  // State field(s) for ChoiceChips widget.
+  FormFieldController<List<String>>? choiceChipsValueController;
+  String? get choiceChipsValue =>
+      choiceChipsValueController?.value?.firstOrNull;
+  set choiceChipsValue(String? val) =>
+      choiceChipsValueController?.value = val != null ? [val] : [];
 
   /// Initialization and disposal methods.
 

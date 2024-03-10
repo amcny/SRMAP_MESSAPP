@@ -1,11 +1,15 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'my_orders_widget.dart' show MyOrdersWidget;
+import '/flutter_flow/form_field_controller.dart';
+import 'choosemess_widget.dart' show ChoosemessWidget;
 import 'package:flutter/material.dart';
 
-class MyOrdersModel extends FlutterFlowModel<MyOrdersWidget> {
+class ChoosemessModel extends FlutterFlowModel<ChoosemessWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
 
   /// Initialization and disposal methods.
 

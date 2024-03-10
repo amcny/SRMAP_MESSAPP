@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -27,6 +28,21 @@ class FFAppState extends ChangeNotifier {
     });
     _safeInit(() {
       _ChooseHostel = prefs.getString('ff_ChooseHostel') ?? _ChooseHostel;
+    });
+    _safeInit(() {
+      _cart = prefs
+              .getStringList('ff_cart')
+              ?.map((x) {
+                try {
+                  return CartItemTypeStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _cart;
     });
   }
 
@@ -74,18 +90,22 @@ class FFAppState extends ChangeNotifier {
   List<CartItemTypeStruct> get cart => _cart;
   set cart(List<CartItemTypeStruct> value) {
     _cart = value;
+    prefs.setStringList('ff_cart', value.map((x) => x.serialize()).toList());
   }
 
   void addToCart(CartItemTypeStruct value) {
     _cart.add(value);
+    prefs.setStringList('ff_cart', _cart.map((x) => x.serialize()).toList());
   }
 
   void removeFromCart(CartItemTypeStruct value) {
     _cart.remove(value);
+    prefs.setStringList('ff_cart', _cart.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromCart(int index) {
     _cart.removeAt(index);
+    prefs.setStringList('ff_cart', _cart.map((x) => x.serialize()).toList());
   }
 
   void updateCartAtIndex(
@@ -93,10 +113,12 @@ class FFAppState extends ChangeNotifier {
     CartItemTypeStruct Function(CartItemTypeStruct) updateFn,
   ) {
     _cart[index] = updateFn(_cart[index]);
+    prefs.setStringList('ff_cart', _cart.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInCart(int index, CartItemTypeStruct value) {
     _cart.insert(index, value);
+    prefs.setStringList('ff_cart', _cart.map((x) => x.serialize()).toList());
   }
 
   double _cartSum = 0.0;

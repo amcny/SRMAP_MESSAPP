@@ -51,6 +51,11 @@ class MyOrdersRecord extends FirestoreRecord {
   String get hostelName => _hostelName ?? '';
   bool hasHostelName() => _hostelName != null;
 
+  // "Cancel_Reason" field.
+  String? _cancelReason;
+  String get cancelReason => _cancelReason ?? '';
+  bool hasCancelReason() => _cancelReason != null;
+
   void _initializeFields() {
     _orderId = snapshotData['OrderId'] as String?;
     _orderItems = getStructList(
@@ -62,6 +67,7 @@ class MyOrdersRecord extends FirestoreRecord {
     _orderCreatedDate = snapshotData['OrderCreatedDate'] as DateTime?;
     _userRef = snapshotData['UserRef'] as DocumentReference?;
     _hostelName = snapshotData['Hostel_Name'] as String?;
+    _cancelReason = snapshotData['Cancel_Reason'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -105,6 +111,7 @@ Map<String, dynamic> createMyOrdersRecordData({
   DateTime? orderCreatedDate,
   DocumentReference? userRef,
   String? hostelName,
+  String? cancelReason,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -114,6 +121,7 @@ Map<String, dynamic> createMyOrdersRecordData({
       'OrderCreatedDate': orderCreatedDate,
       'UserRef': userRef,
       'Hostel_Name': hostelName,
+      'Cancel_Reason': cancelReason,
     }.withoutNulls,
   );
 
@@ -132,7 +140,8 @@ class MyOrdersRecordDocumentEquality implements Equality<MyOrdersRecord> {
         e1?.orderStatus == e2?.orderStatus &&
         e1?.orderCreatedDate == e2?.orderCreatedDate &&
         e1?.userRef == e2?.userRef &&
-        e1?.hostelName == e2?.hostelName;
+        e1?.hostelName == e2?.hostelName &&
+        e1?.cancelReason == e2?.cancelReason;
   }
 
   @override
@@ -143,7 +152,8 @@ class MyOrdersRecordDocumentEquality implements Equality<MyOrdersRecord> {
         e?.orderStatus,
         e?.orderCreatedDate,
         e?.userRef,
-        e?.hostelName
+        e?.hostelName,
+        e?.cancelReason
       ]);
 
   @override

@@ -25,8 +25,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SettingsModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -199,7 +197,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Icon(
-                              Icons.people_rounded,
+                              Icons.people_outline,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 24.0,
                             ),
@@ -242,7 +240,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('dropdown');
+                    context.pushNamed('choosemess');
                   },
                   child: Container(
                     width: double.infinity,
@@ -307,7 +305,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('canteen');
+                    context.pushNamed('canteentest');
                   },
                   child: Container(
                     width: double.infinity,
@@ -330,7 +328,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Icon(
-                            Icons.dining_outlined,
+                            Icons.storefront_outlined,
                             color: FlutterFlowTheme.of(context).secondaryText,
                             size: 24.0,
                           ),
@@ -372,7 +370,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('MyOrders');
+                    context.pushNamed('myorders');
                   },
                   child: Container(
                     width: double.infinity,
@@ -395,7 +393,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Icon(
-                            Icons.dining_outlined,
+                            Icons.shopping_bag_outlined,
                             color: FlutterFlowTheme.of(context).secondaryText,
                             size: 24.0,
                           ),
@@ -797,7 +795,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       }(),
                     );
 
-                    context.goNamedAuth('Authentication', context.mounted);
+                    context.goNamedAuth('authentication', context.mounted);
                   },
                   child: Container(
                     width: double.infinity,

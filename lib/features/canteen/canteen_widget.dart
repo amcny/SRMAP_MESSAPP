@@ -33,7 +33,6 @@ class _CanteenWidgetState extends State<CanteenWidget>
       length: 11,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
