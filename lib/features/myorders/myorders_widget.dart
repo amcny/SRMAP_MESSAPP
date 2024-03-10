@@ -50,25 +50,33 @@ class _MyordersWidgetState extends State<MyordersWidget> {
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xFF404020),
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
-              color: Color(0xFF606A85),
+              color: FlutterFlowTheme.of(context).primaryText,
               size: 30.0,
             ),
             onPressed: () async {
               context.pop();
             },
           ),
+          title: Text(
+            'Recent Orders',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Ubuntu',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+          ),
           actions: const [],
-          centerTitle: true,
-          elevation: 0.0,
+          centerTitle: false,
+          elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
@@ -77,84 +85,68 @@ class _MyordersWidgetState extends State<MyordersWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                child: Text(
-                  'Recent Orders',
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
-                        color: const Color(0xFF15161E),
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w500,
-                      ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 0.0, 0.0),
                 child: Text(
                   'Below are your most recent orders',
                   textAlign: TextAlign.start,
                   style: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Ubuntu',
                         color: const Color(0xFF606A85),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.normal,
                       ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: StreamBuilder<List<MyOrdersRecord>>(
-                  stream: queryMyOrdersRecord(
-                    queryBuilder: (myOrdersRecord) => myOrdersRecord
-                        .where(
-                          'UserRef',
-                          isEqualTo: currentUserReference,
-                        )
-                        .orderBy('OrderCreatedDate', descending: true),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return const Center(
-                        child: SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: SpinKitRipple(
-                            color: Color(0xFF404020),
-                            size: 50.0,
-                          ),
+              StreamBuilder<List<MyOrdersRecord>>(
+                stream: queryMyOrdersRecord(
+                  queryBuilder: (myOrdersRecord) => myOrdersRecord
+                      .where(
+                        'UserRef',
+                        isEqualTo: currentUserReference,
+                      )
+                      .orderBy('OrderCreatedDate', descending: true),
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: SpinKitRipple(
+                          color: Color(0xFF404020),
+                          size: 50.0,
                         ),
-                      );
-                    }
-                    List<MyOrdersRecord> listViewMyOrdersRecordList =
-                        snapshot.data!;
-                    return ListView.separated(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      reverse: true,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewMyOrdersRecordList.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 20.0),
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewMyOrdersRecord =
-                            listViewMyOrdersRecordList[listViewIndex];
-                        return Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              15.0, 0.0, 15.0, 0.0),
+                      ),
+                    );
+                  }
+                  List<MyOrdersRecord> listViewMyOrdersRecordList =
+                      snapshot.data!;
+                  return ListView.separated(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    reverse: true,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: listViewMyOrdersRecordList.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 20.0),
+                    itemBuilder: (context, listViewIndex) {
+                      final listViewMyOrdersRecord =
+                          listViewMyOrdersRecordList[listViewIndex];
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            15.0, 0.0, 15.0, 0.0),
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 1.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                           child: Container(
                             width: double.infinity,
                             height: 100.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  offset: const Offset(0.0, 2.0),
-                                )
-                              ],
                               borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(
                                 color: FlutterFlowTheme.of(context).alternate,
@@ -171,6 +163,8 @@ class _MyordersWidgetState extends State<MyordersWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
@@ -217,6 +211,7 @@ class _MyordersWidgetState extends State<MyordersWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
                                         formatNumber(
@@ -311,80 +306,95 @@ class _MyordersWidgetState extends State<MyordersWidget> {
                                               return;
                                             }
                                           },
-                                          child: Container(
-                                            width: 90.0,
-                                            height: 30.0,
-                                            decoration: BoxDecoration(
-                                              color: () {
-                                                if (listViewMyOrdersRecord
-                                                        .orderStatus ==
-                                                    OrderStatus.Pending) {
-                                                  return const Color(0xFF2C73CD);
-                                                } else if (listViewMyOrdersRecord
-                                                        .orderStatus ==
-                                                    OrderStatus.Accepted) {
-                                                  return FlutterFlowTheme.of(
-                                                          context)
-                                                      .success;
-                                                } else if (listViewMyOrdersRecord
-                                                        .orderStatus ==
-                                                    OrderStatus.Completed) {
-                                                  return const Color(0xFF3BE76F);
-                                                } else if (listViewMyOrdersRecord
-                                                        .orderStatus ==
-                                                    OrderStatus.Cancelled) {
-                                                  return FlutterFlowTheme.of(
-                                                          context)
-                                                      .error;
-                                                } else if (listViewMyOrdersRecord
-                                                        .orderStatus ==
-                                                    OrderStatus.Delivered) {
-                                                  return const Color(0xFF026A3A);
-                                                } else {
-                                                  return const Color(0x00000000);
-                                                }
-                                              }(),
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            elevation: 0.5,
+                                            shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              border: Border.all(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                              ),
+                                                  BorderRadius.circular(24.0),
                                             ),
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Align(
+                                            child: Container(
+                                              width: 90.0,
+                                              height: 35.0,
+                                              decoration: BoxDecoration(
+                                                color: () {
+                                                  if (listViewMyOrdersRecord
+                                                          .orderStatus ==
+                                                      OrderStatus.Pending) {
+                                                    return const Color(0xFF2C73CD);
+                                                  } else if (listViewMyOrdersRecord
+                                                          .orderStatus ==
+                                                      OrderStatus.Accepted) {
+                                                    return FlutterFlowTheme.of(
+                                                            context)
+                                                        .success;
+                                                  } else if (listViewMyOrdersRecord
+                                                          .orderStatus ==
+                                                      OrderStatus.Completed) {
+                                                    return const Color(0xFF3BE76F);
+                                                  } else if (listViewMyOrdersRecord
+                                                          .orderStatus ==
+                                                      OrderStatus.Cancelled) {
+                                                    return FlutterFlowTheme.of(
+                                                            context)
+                                                        .error;
+                                                  } else if (listViewMyOrdersRecord
+                                                          .orderStatus ==
+                                                      OrderStatus.Delivered) {
+                                                    return const Color(0xFF026A3A);
+                                                  } else {
+                                                    return const Color(0x00000000);
+                                                  }
+                                                }(),
+                                                borderRadius:
+                                                    BorderRadius.circular(24.0),
+                                                border: Border.all(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                ),
+                                              ),
                                               alignment: const AlignmentDirectional(
                                                   0.0, 0.0),
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  listViewMyOrdersRecord
-                                                      .orderStatus?.name,
-                                                  'status',
-                                                ),
-                                                textAlign: TextAlign.center,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Ubuntu',
-                                                      color: (listViewMyOrdersRecord
-                                                                      .orderStatus ==
-                                                                  OrderStatus
-                                                                      .Accepted) ||
-                                                              (listViewMyOrdersRecord
-                                                                      .orderStatus ==
-                                                                  OrderStatus
-                                                                      .Delivered)
-                                                          ? FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryBackground
-                                                          : FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      fontSize: 13.0,
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(5.0),
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      listViewMyOrdersRecord
+                                                          .orderStatus?.name,
+                                                      'status',
                                                     ),
+                                                    textAlign: TextAlign.center,
+                                                    style:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              color: (listViewMyOrdersRecord
+                                                                              .orderStatus ==
+                                                                          OrderStatus
+                                                                              .Accepted) ||
+                                                                      (listViewMyOrdersRecord
+                                                                              .orderStatus ==
+                                                                          OrderStatus
+                                                                              .Delivered)
+                                                                  ? FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryBackground
+                                                                  : FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                              fontSize: 14.0,
+                                                              letterSpacing:
+                                                                  0.5,
+                                                            ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -396,11 +406,11 @@ class _MyordersWidgetState extends State<MyordersWidget> {
                               ],
                             ),
                           ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ],
           ),

@@ -59,7 +59,7 @@ class _MainindexWidgetState extends State<MainindexWidget> {
           ),
           actions: const [],
           centerTitle: false,
-          elevation: 2.0,
+          elevation: 0.5,
         ),
         body: SafeArea(
           top: true,

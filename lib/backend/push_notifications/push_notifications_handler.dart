@@ -112,9 +112,7 @@ final parametersBuilderMap =
       ),
   'settings': ParameterData.none(),
   'choosemess': ParameterData.none(),
-  'onboarding': ParameterData.none(),
   'hostler_dayscholor': ParameterData.none(),
-  'canteen': ParameterData.none(),
   'itemdetails': (data) async => ParameterData(
         allParams: {
           'itemSelection': await getDocumentParameter<MenuItemsRecord>(
@@ -128,7 +126,8 @@ final parametersBuilderMap =
         },
       ),
   'carts': ParameterData.none(),
-  'canteentest': ParameterData.none(),
+  'canteen': ParameterData.none(),
+  'onboarding': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

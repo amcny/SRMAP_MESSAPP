@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'canteen_widget.dart' show CanteenWidget;
 import 'package:flutter/material.dart';
 
@@ -6,10 +7,12 @@ class CanteenModel extends FlutterFlowModel<CanteenWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for Categories widget.
-  TabController? categoriesController;
-  int get categoriesCurrentIndex =>
-      categoriesController != null ? categoriesController!.index : 0;
+  // State field(s) for ChoiceChips widget.
+  FormFieldController<List<String>>? choiceChipsValueController;
+  String? get choiceChipsValue =>
+      choiceChipsValueController?.value?.firstOrNull;
+  set choiceChipsValue(String? val) =>
+      choiceChipsValueController?.value = val != null ? [val] : [];
 
   /// Initialization and disposal methods.
 
@@ -19,7 +22,6 @@ class CanteenModel extends FlutterFlowModel<CanteenWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    categoriesController?.dispose();
   }
 
   /// Action blocks are added here.

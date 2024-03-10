@@ -61,7 +61,7 @@ class _HostlerDayscholorWidgetState extends State<HostlerDayscholorWidget> {
                   child: Lottie.asset(
                     'assets/lottie_animations/Animation_-_1707117835521.json',
                     width: 343.0,
-                    height: 325.0,
+                    height: 221.0,
                     fit: BoxFit.contain,
                     animate: true,
                   ),
@@ -161,7 +161,7 @@ class _HostlerDayscholorWidgetState extends State<HostlerDayscholorWidget> {
                         const EdgeInsetsDirectional.fromSTEB(24.0, 18.0, 24.0, 18.0),
                     iconPadding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
+                    color: const Color(0xFF404020),
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Ubuntu',
                           color: Colors.white,

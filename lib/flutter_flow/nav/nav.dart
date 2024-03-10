@@ -75,13 +75,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const AuthenticationWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const OnboardingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const AuthenticationWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const OnboardingWidget(),
         ),
         FFRoute(
           name: 'homepage',
@@ -118,19 +118,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const ChoosemessWidget(),
         ),
         FFRoute(
-          name: 'onboarding',
-          path: '/onboarding',
-          builder: (context, params) => const OnboardingWidget(),
-        ),
-        FFRoute(
           name: 'hostler_dayscholor',
           path: '/hostlerDayscholor',
           builder: (context, params) => const HostlerDayscholorWidget(),
-        ),
-        FFRoute(
-          name: 'canteen',
-          path: '/canteen',
-          builder: (context, params) => const CanteenWidget(),
         ),
         FFRoute(
           name: 'itemdetails',
@@ -161,9 +151,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const CartsWidget(),
         ),
         FFRoute(
-          name: 'canteentest',
-          path: '/canteentest',
-          builder: (context, params) => const CanteentestWidget(),
+          name: 'canteen',
+          path: '/canteen',
+          builder: (context, params) => const CanteenWidget(),
+        ),
+        FFRoute(
+          name: 'onboarding',
+          path: '/onboarding',
+          builder: (context, params) => const OnboardingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -330,7 +325,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/authentication';
+            return '/onboarding';
           }
           return null;
         },

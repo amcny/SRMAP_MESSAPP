@@ -77,7 +77,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
           ),
           actions: const [],
           centerTitle: false,
-          elevation: 2.0,
+          elevation: 0.5,
         ),
         body: SafeArea(
           top: true,
@@ -85,112 +85,119 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: MediaQuery.sizeOf(context).width * 1.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 4.0,
-                      color: Color(0x33000000),
-                      offset: Offset(2.0, 2.0),
-                    )
-                  ],
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(15.0),
-                    bottomRight: Radius.circular(15.0),
-                    topLeft: Radius.circular(0.0),
-                    topRight: Radius.circular(0.0),
-                  ),
-                  border: Border.all(
-                    color: FlutterFlowTheme.of(context).alternate,
-                  ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 15.0, 8.0, 10.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          widget.itemSelection!.image,
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: 275.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(15.0, 5.0, 0.0, 8.0),
-                        child: Text(
-                          valueOrDefault<String>(
-                            widget.itemSelection?.name,
-                            'name',
-                          ),
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 20.0,
-                                  ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            15.0, 0.0, 0.0, 15.0),
-                        child: Text(
-                          formatNumber(
-                            widget.itemSelection!.price,
-                            formatType: FormatType.custom,
-                            currency: '₹ ',
-                            format: '',
-                            locale: '',
-                          ),
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 19.0,
-                                  ),
-                        ),
-                      ),
-                    ),
-                    Divider(
-                      height: 2.0,
-                      thickness: 3.0,
-                      indent: 15.0,
-                      endIndent: 15.0,
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width * 1.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 4.0,
+                        color: Color(0x33000000),
+                        offset: Offset(2.0, 2.0),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(15.0),
+                    border: Border.all(
                       color: FlutterFlowTheme.of(context).alternate,
                     ),
-                    Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            15.0, 20.0, 0.0, 20.0),
-                        child: Text(
-                          'Category : ${widget.itemSelection?.category}',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 20.0,
-                                  ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(7.0),
+                          child: Image.network(
+                            widget.itemSelection!.image,
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: 275.0,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    wrapWithModel(
-                      model: _model.countControllerModel,
-                      updateCallback: () => setState(() {}),
-                      child: const CountControllerWidget(),
-                    ),
-                  ],
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              15.0, 5.0, 0.0, 8.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              widget.itemSelection?.name,
+                              'name',
+                            ),
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 20.0,
+                                ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              15.0, 0.0, 0.0, 15.0),
+                          child: Text(
+                            formatNumber(
+                              widget.itemSelection!.price,
+                              formatType: FormatType.custom,
+                              currency: '₹ ',
+                              format: '',
+                              locale: '',
+                            ),
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 19.0,
+                                ),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: 2.0,
+                        thickness: 3.0,
+                        indent: 15.0,
+                        endIndent: 15.0,
+                        color: FlutterFlowTheme.of(context).alternate,
+                      ),
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              15.0, 20.0, 0.0, 20.0),
+                          child: Text(
+                            'Category : ${widget.itemSelection?.category}',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 20.0,
+                                ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: const AlignmentDirectional(1.0, 0.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 15.0, 0.0),
+                          child: wrapWithModel(
+                            model: _model.countControllerModel,
+                            updateCallback: () => setState(() {}),
+                            child: const CountControllerWidget(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(
@@ -250,7 +257,7 @@ class _ItemdetailsWidgetState extends State<ItemdetailsWidget> {
                       color: Colors.transparent,
                       width: 1.0,
                     ),
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
               ),

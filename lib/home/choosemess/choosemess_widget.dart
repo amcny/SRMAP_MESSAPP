@@ -59,7 +59,7 @@ class _ChoosemessWidgetState extends State<ChoosemessWidget> {
             ),
             actions: const [],
             centerTitle: false,
-            elevation: 2.0,
+            elevation: 0.5,
           ),
           body: SafeArea(
             top: true,
