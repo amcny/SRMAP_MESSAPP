@@ -24,6 +24,8 @@ class _HomepageWidgetState extends State<HomepageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomepageModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -112,6 +114,8 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                                 );
                               },
                               child: Container(
+                                width: 50.0,
+                                height: 50.0,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(

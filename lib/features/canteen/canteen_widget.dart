@@ -87,6 +87,8 @@ class _CanteenWidgetState extends State<CanteenWidget>
           .controller
           .forward(from: 0.0);
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -136,40 +138,44 @@ class _CanteenWidgetState extends State<CanteenWidget>
                       fontSize: 25.0,
                     ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('carts');
-                  },
-                  child: badges.Badge(
-                    badgeContent: Text(
-                      valueOrDefault<String>(
-                        FFAppState().numberOfItemsinCart.toString(),
-                        'num',
+              Align(
+                alignment: const AlignmentDirectional(0.0, 0.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('carts');
+                    },
+                    child: badges.Badge(
+                      badgeContent: Text(
+                        valueOrDefault<String>(
+                          FFAppState().numberOfItemsinCart.toString(),
+                          'num',
+                        ),
+                        style: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Ubuntu',
+                              color: const Color(0xFF404020),
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.normal,
+                            ),
                       ),
-                      style: FlutterFlowTheme.of(context).titleSmall.override(
-                            fontFamily: 'Ubuntu',
-                            color: Colors.white,
-                            fontSize: 12.0,
-                          ),
-                    ),
-                    showBadge: true,
-                    shape: badges.BadgeShape.circle,
-                    badgeColor: const Color(0xFF404020),
-                    elevation: 4.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                    position: badges.BadgePosition.topEnd(),
-                    animationType: badges.BadgeAnimationType.scale,
-                    toAnimate: true,
-                    child: const Icon(
-                      Icons.shopping_cart_rounded,
-                      color: Color(0xFFF5F5F5),
-                      size: 28.0,
+                      showBadge: true,
+                      shape: badges.BadgeShape.circle,
+                      badgeColor: const Color(0xFFF5F5F5),
+                      elevation: 0.0,
+                      padding: const EdgeInsets.all(5.0),
+                      position: badges.BadgePosition.topEnd(),
+                      animationType: badges.BadgeAnimationType.scale,
+                      toAnimate: true,
+                      child: const Icon(
+                        Icons.shopping_cart_rounded,
+                        color: Color(0xFFF5F5F5),
+                        size: 28.0,
+                      ),
                     ),
                   ),
                 ),
@@ -211,27 +217,33 @@ class _CanteenWidgetState extends State<CanteenWidget>
                           FlutterFlowTheme.of(context).bodyMedium.override(
                                 fontFamily: 'Ubuntu',
                                 color: const Color(0xFFF5F5F5),
+                                fontSize: 16.0,
                               ),
                       iconColor: Colors.white,
-                      iconSize: 18.0,
+                      iconSize: 20.0,
+                      labelPadding: const EdgeInsets.all(5.0),
                       elevation: 4.0,
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     unselectedChipStyle: ChipStyle(
-                      backgroundColor: FlutterFlowTheme.of(context).alternate,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                       textStyle: FlutterFlowTheme.of(context)
                           .bodyMedium
                           .override(
                             fontFamily: 'Ubuntu',
                             color: FlutterFlowTheme.of(context).secondaryText,
+                            letterSpacing: 0.3,
                           ),
                       iconColor: FlutterFlowTheme.of(context).secondaryText,
-                      iconSize: 18.0,
+                      iconSize: 20.0,
+                      labelPadding:
+                          const EdgeInsetsDirectional.fromSTEB(6.0, 3.0, 6.0, 3.0),
                       elevation: 0.0,
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     chipSpacing: 12.0,
-                    rowSpacing: 12.0,
+                    rowSpacing: 10.0,
                     multiselect: false,
                     initialized: _model.choiceChipsValue != null,
                     alignment: WrapAlignment.start,

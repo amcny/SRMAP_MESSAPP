@@ -23,6 +23,8 @@ class _MainindexWidgetState extends State<MainindexWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MainindexModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

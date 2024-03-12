@@ -119,6 +119,8 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
 
     _model.passwordCreateController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -24,6 +24,8 @@ class _ChoosemessWidgetState extends State<ChoosemessWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ChoosemessModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -50,7 +52,7 @@ class _ChoosemessWidgetState extends State<ChoosemessWidget> {
             backgroundColor: const Color(0xFF404020),
             automaticallyImplyLeading: false,
             title: Text(
-              'SRMAP MESS',
+              'Choose Mess',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Ubuntu',
                     color: Colors.white,
@@ -66,20 +68,6 @@ class _ChoosemessWidgetState extends State<ChoosemessWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(15.0, 10.0, 0.0, 0.0),
-                    child: Text(
-                      'Choose Mess ',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Ubuntu',
-                            fontSize: 25.0,
-                          ),
-                    ),
-                  ),
-                ),
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Padding(

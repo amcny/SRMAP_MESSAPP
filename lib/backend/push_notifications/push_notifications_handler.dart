@@ -120,14 +120,16 @@ final parametersBuilderMap =
         },
       ),
   'authentication': ParameterData.none(),
-  'myorders': (data) async => ParameterData(
-        allParams: {
-          'listHasOrders': getParameter<bool>(data, 'listHasOrders'),
-        },
-      ),
+  'myorders': ParameterData.none(),
   'carts': ParameterData.none(),
   'canteen': ParameterData.none(),
   'onboarding': ParameterData.none(),
+  'order_details': (data) async => ParameterData(
+        allParams: {
+          'orders': await getDocumentParameter<MyOrdersRecord>(
+              data, 'orders', MyOrdersRecord.fromSnapshot),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

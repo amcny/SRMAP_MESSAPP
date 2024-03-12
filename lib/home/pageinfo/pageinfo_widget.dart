@@ -28,6 +28,8 @@ class _PageinfoWidgetState extends State<PageinfoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PageinfoModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -48,6 +48,8 @@ class _CartsWidgetState extends State<CartsWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => CartsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -509,7 +511,7 @@ class _CartsWidgetState extends State<CartsWidget>
                                   userRef: currentUserReference,
                                   orderStatus: OrderStatus.Pending,
                                   orderId:
-                                      'GPEMC ${random_data.randomInteger(100000, 999999).toString()}',
+                                      'GPEMC-${random_data.randomInteger(100000, 999999).toString()}',
                                   hostelName: FFAppState().ChooseHostel,
                                 ),
                                 ...mapToFirestore(

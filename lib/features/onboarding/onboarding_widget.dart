@@ -22,6 +22,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => OnboardingModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -90,7 +92,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                     Align(
                       alignment: const AlignmentDirectional(0.0, 0.4),
                       child: Text(
-                        'Welcome Back!!',
+                        'Welcome To !!',
                         style: FlutterFlowTheme.of(context)
                             .displaySmall
                             .override(

@@ -141,9 +141,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'myorders',
           path: '/myorders',
-          builder: (context, params) => MyordersWidget(
-            listHasOrders: params.getParam('listHasOrders', ParamType.bool),
-          ),
+          builder: (context, params) => const MyordersWidget(),
         ),
         FFRoute(
           name: 'carts',
@@ -159,6 +157,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'onboarding',
           path: '/onboarding',
           builder: (context, params) => const OnboardingWidget(),
+        ),
+        FFRoute(
+          name: 'order_details',
+          path: '/orderDetails',
+          asyncParams: {
+            'orders': getDoc(['My_Orders'], MyOrdersRecord.fromSnapshot),
+          },
+          builder: (context, params) => OrderDetailsWidget(
+            orders: params.getParam('orders', ParamType.Document),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

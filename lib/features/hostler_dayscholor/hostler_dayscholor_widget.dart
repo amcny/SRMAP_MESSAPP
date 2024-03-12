@@ -28,6 +28,8 @@ class _HostlerDayscholorWidgetState extends State<HostlerDayscholorWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HostlerDayscholorModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

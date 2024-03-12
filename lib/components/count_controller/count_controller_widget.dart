@@ -26,6 +26,8 @@ class _CountControllerWidgetState extends State<CountControllerWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CountControllerModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -38,7 +40,7 @@ class _CountControllerWidgetState extends State<CountControllerWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 25.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 15.0),
       child: Container(
         width: 150.0,
         height: 50.0,
@@ -70,13 +72,14 @@ class _CountControllerWidgetState extends State<CountControllerWidget> {
             count.toString(),
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: 'Ubuntu',
-                  fontSize: 23.0,
+                  fontSize: 20.0,
                 ),
           ),
           count: _model.countControllerValue ??= 1,
           updateCount: (count) =>
               setState(() => _model.countControllerValue = count),
           stepSize: 1,
+          minimum: 1,
           contentPadding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
         ),
       ),

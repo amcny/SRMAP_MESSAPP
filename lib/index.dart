@@ -13,3 +13,5 @@ export '/features/myorders/myorders_widget.dart' show MyordersWidget;
 export '/features/carts/carts_widget.dart' show CartsWidget;
 export '/features/canteen/canteen_widget.dart' show CanteenWidget;
 export '/features/onboarding/onboarding_widget.dart' show OnboardingWidget;
+export '/features/order_details/order_details_widget.dart'
+    show OrderDetailsWidget;

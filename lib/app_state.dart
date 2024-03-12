@@ -30,6 +30,10 @@ class FFAppState extends ChangeNotifier {
       _ChooseHostel = prefs.getString('ff_ChooseHostel') ?? _ChooseHostel;
     });
     _safeInit(() {
+      _VerifyEmailAddress =
+          prefs.getBool('ff_VerifyEmailAddress') ?? _VerifyEmailAddress;
+    });
+    _safeInit(() {
       _cart = prefs
               .getStringList('ff_cart')
               ?.map((x) {
@@ -43,6 +47,13 @@ class FFAppState extends ChangeNotifier {
               .withoutNulls
               .toList() ??
           _cart;
+    });
+    _safeInit(() {
+      _cartSum = prefs.getDouble('ff_cartSum') ?? _cartSum;
+    });
+    _safeInit(() {
+      _numberOfItemsinCart =
+          prefs.getInt('ff_numberOfItemsinCart') ?? _numberOfItemsinCart;
     });
   }
 
@@ -84,6 +95,7 @@ class FFAppState extends ChangeNotifier {
   bool get VerifyEmailAddress => _VerifyEmailAddress;
   set VerifyEmailAddress(bool value) {
     _VerifyEmailAddress = value;
+    prefs.setBool('ff_VerifyEmailAddress', value);
   }
 
   List<CartItemTypeStruct> _cart = [];
@@ -125,12 +137,14 @@ class FFAppState extends ChangeNotifier {
   double get cartSum => _cartSum;
   set cartSum(double value) {
     _cartSum = value;
+    prefs.setDouble('ff_cartSum', value);
   }
 
   int _numberOfItemsinCart = 0;
   int get numberOfItemsinCart => _numberOfItemsinCart;
   set numberOfItemsinCart(int value) {
     _numberOfItemsinCart = value;
+    prefs.setInt('ff_numberOfItemsinCart', value);
   }
 }
 
